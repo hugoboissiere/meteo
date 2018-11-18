@@ -10,8 +10,12 @@
 	},
 	"dependencies": {
 		"@babel/core": "^7.1.6",
+		"@types/react-native-document-picker": "^2.0.0",
+		"@types/react-native-fs": "^2.8.2",
 		"react": "^16.6.1",
-		"react-native": "^0.57.5"
+		"react-native": "^0.57.5",
+		"react-native-document-picker": "^2.1.0",
+		"react-native-fs": "^2.12.1"
 	},
 	"devDependencies": {
 		"@types/react": "^16.4.18",

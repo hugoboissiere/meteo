@@ -1,35 +1,69 @@
-import React, {Component} from 'react'
-import {StyleSheet, Text, View} from 'react-native'
-
-export interface AppProps {
-}
+import React, { Component } from "react";
+import { StyleSheet, Text, View, Button } from "react-native";
+import { DocumentPicker, DocumentPickerUtil, Result } from 'react-native-document-picker';
+import * as RNFS from "react-native-fs";
+export interface AppProps {}
 
 export class App extends Component<AppProps> {
-	render() {
-		return (
-			<View style={styles.container}>
-				<Text style={styles.welcome}>App meteo!</Text>
-				<Text style={styles.instructions}>To get started, edit src/app.tsx</Text>
-			</View>
-		)
+
+  TryUploadFile = () => {
+
+    DocumentPicker.show({
+			filetype: [DocumentPickerUtil.allFiles()],
+    },(error,res) => {
+      // Android
+			if (res)
+			console.log(
+         res.uri,
+         res.type, // mime type
+         res.fileName,
+         res.fileSize
+			);
+			this.moveFile(res.uri);
+		});
 	}
+	
+	moveFile(url: string) {
+
+		var destPath = RNFS.DocumentDirectoryPath + '/' + 'name';
+		console.log("ULTRA ULTRA ULTRA BIEN");
+		RNFS.moveFile(url, destPath)
+			.then((success) => {
+				console.log('file moved!');
+			})
+			.catch((err) => {
+				console.log("Error: " + err.message);
+			});
+	}
+
+	render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>App meteo!</Text>
+        <Text style={styles.instructions}>
+					test
+        </Text>
+				<Button title="Upload File" onPress={this.TryUploadFile}/>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#F5FCFF',
-	},
-	welcome: {
-		fontSize: 20,
-		textAlign: 'center',
-		margin: 10,
-	},
-	instructions: {
-		textAlign: 'center',
-		color: '#333333',
-		marginBottom: 5,
-	},
-})
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5FCFF"
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: "center",
+    margin: 10
+  },
+  instructions: {
+    textAlign: "center",
+    color: "#333333",
+    marginBottom: 5
+  }
+});
