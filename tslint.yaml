@@ -50,8 +50,8 @@ rules:
   no-duplicate-super: true
 
   # production
-  no-console: true
-  no-debugger: true
+  no-console: false
+  no-debugger: false
 
   # style
   no-reference: true
@@ -63,15 +63,15 @@ rules:
   no-require-imports: true
   jsdoc-format: [true, check-multiline-start]
   new-parens: true
-  trailing-comma:
-    - true
-    - singleline: never
-      multiline:
-        objects: always
-        arrays: always
-        functions: always
-        typeLiterals: ignore
-      esSpecCompliant: true
+  #trailing-comma:
+  #  - true
+  # - singleline: never
+  #   multiline:
+  #     objects: always
+  #     arrays: always
+  #      functions: always
+  #      typeLiterals: ignore
+  #    esSpecCompliant: true
   object-literal-key-quotes: [true, as-needed]
   object-literal-shorthand: true
   one-line:
