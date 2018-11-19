@@ -12,38 +12,22 @@ export class App extends Component<AppProps> {
 			filetype: [DocumentPickerUtil.allFiles()],
 		}, (error, res) => {
 			// Android
-			if (res)
-				console.log(
-					res.uri,
-					res.type, // mime type
-					res.fileName,
-					res.fileSize
-				)
+			if (error)
+				return
 			this.moveFile(res.uri)
 		})
 	}
 
 	moveFile(url: string) {
 
-		const destPath = RNFS.DocumentDirectoryPath + '/.meteo/test.his'
 		const path = RNFS.ExternalDirectoryPath + '/test.txt'
 
-		// write the file
-		RNFS.writeFile(path, 'Lorem ipsum dolor sit amet', 'utf8')
-			.then((success) => {
-				console.log('FILE WRITTEN!')
-			})
+		RNFS.moveFile(url, path).then(() => {
+
+		})
 			.catch((err) => {
-				console.log(err.message)
+				console.warn("Error: " + err.message)
 			})
-		// console.log("ULTRA ULTRA ULTRA BIEN", destPath);
-		// RNFS.moveFile(url, destPath)
-		// 	.then((success) => {
-		// 		console.log('file moved!', success);
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log("Error: " + err.message);
-		// 	})
 	}
 
 	render() {
