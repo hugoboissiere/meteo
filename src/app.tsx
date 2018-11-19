@@ -25,15 +25,25 @@ export class App extends Component<AppProps> {
 
 	moveFile(url: string) {
 
-		const destPath = RNFS.DocumentDirectoryPath + '/' + 'name';
-		console.log("ULTRA ULTRA ULTRA BIEN");
-		RNFS.moveFile(url, destPath)
+		const destPath = RNFS.DocumentDirectoryPath + '/.meteo/test.his';
+		var path = RNFS.ExternalDirectoryPath + '/test.txt';
+
+		// write the file
+		RNFS.writeFile(path, 'Lorem ipsum dolor sit amet', 'utf8')
 			.then((success) => {
-				console.log('file moved!');
+				console.log('FILE WRITTEN!');
 			})
 			.catch((err) => {
-				console.log("Error: " + err.message);
-			})
+				console.log(err.message);
+			});
+		// console.log("ULTRA ULTRA ULTRA BIEN", destPath);
+		// RNFS.moveFile(url, destPath)
+		// 	.then((success) => {
+		// 		console.log('file moved!', success);
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log("Error: " + err.message);
+		// 	})
 	}
 
 	render() {
