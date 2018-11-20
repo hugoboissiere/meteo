@@ -7,31 +7,6 @@ import { UploadButton } from "./components/upload-button/index"
 export interface AppProps { }
 
 export class App extends Component<AppProps> {
-
-	TryUploadFile = () => {
-
-		DocumentPicker.show({
-			filetype: [DocumentPickerUtil.allFiles()],
-		}, (error, res) => {
-			// Android
-			if (error)
-				return
-			this.moveFile(res.uri)
-		})
-	}
-
-	moveFile(url: string) {
-
-		const path = RNFS.ExternalDirectoryPath + '/test.txt'
-
-		RNFS.moveFile(url, path).then(() => {
-
-		})
-			.catch((err) => {
-				console.warn("Error: " + err.message)
-			})
-	}
-
 	render() {
 		return (
 			<View style={styles.container}>
