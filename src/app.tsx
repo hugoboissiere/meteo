@@ -4,6 +4,7 @@ import { DocumentPicker, DocumentPickerUtil, Result } from 'react-native-documen
 import * as RNFS from "react-native-fs"
 import { styles } from "./styles"
 import { UploadButton } from "./components/upload-button/index"
+import { GraphBasicLine } from "./components/graph-basic-line";
 export interface AppProps { }
 
 export class App extends Component<AppProps> {
@@ -15,6 +16,7 @@ export class App extends Component<AppProps> {
 					test
 				</Text>
 				<UploadButton/>
+				<GraphBasicLine/>
 			</View>
 		)
 	}
