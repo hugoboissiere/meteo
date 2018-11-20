@@ -1,20 +1,36 @@
 import { DocumentPicker, DocumentPickerUtil, Result } from 'react-native-document-picker'
 import * as RNFS from "react-native-fs"
-
-const FILE_START = 2
+import { WeatherProp } from "../../models/weather-prop"
+import { open } from "realm"
 
 export function moveFile(url: string) {
+	if (url.split('.').pop() !== 'his')
+		return
 	RNFS.readFile(url).then((res) => {
 		const array = res.split('\n')
-		const document: String[][] = []
+		const headers = array[1].split('\t')
+		array.splice(0, 2)
 
-		array.splice(0, FILE_START)
-		array.forEach(element => {
-			const item = element.split('\t')
-			document.push(item)
+		open({ schema: [WeatherProp.schema] }).then(realm => {
+			for (let i = 0; i < array.length; i += 120) {
+				const item = array[i].split('\t')
+				console.log(item[0])
+				item.forEach((prop, index) => {
+					realm.write(() => {
+						realm.create<WeatherProp>('WeatherProp', {
+							propName: headers[index],
+							propValue: prop,
+							date: item[0]
+						})
+					})
+				})
+			}
+			console.log("display:", realm.objects<WeatherProp>('WeatherProp'))
+		}).catch(error => {
+			console.log("error:", error)
 		})
 
-		const fileName = document[0][0].split(" ")[0]
+		const fileName = array[0].split(" ")[0]
 		const path = RNFS.ExternalDirectoryPath + '/' + fileName + '.his'
 		RNFS.moveFile(url, path).then(() => {
 

@@ -31,7 +31,7 @@ rules:
   use-isnan: true
 
   # maintenance
-  no-magic-numbers: true
+  no-magic-numbers: false
   no-unused-expression: [true, allow-fast-null-checks]
   no-unused-variable: true
   strict-type-predicates: true
@@ -50,7 +50,7 @@ rules:
   no-duplicate-super: true
 
   # production
-  no-console: false
+  no-console: true
   no-debugger: false
 
   # style
