@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import { StyleSheet, Text, View, Button } from "react-native"
 import { DocumentPicker, DocumentPickerUtil, Result } from 'react-native-document-picker'
 import * as RNFS from "react-native-fs"
+import { styles } from "./styles"
+import { UploadButton } from "./components/upload-button/index"
 export interface AppProps { }
 
 export class App extends Component<AppProps> {
@@ -37,27 +39,8 @@ export class App extends Component<AppProps> {
 				<Text style={styles.instructions}>
 					test
 				</Text>
-				<Button title="Upload File" onPress={this.TryUploadFile} />
+				<UploadButton/>
 			</View>
 		)
 	}
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-		backgroundColor: "#F5FCFF"
-	},
-	welcome: {
-		fontSize: 20,
-		textAlign: "center",
-		margin: 10
-	},
-	instructions: {
-		textAlign: "center",
-		color: "#333333",
-		marginBottom: 5
-	}
-})
