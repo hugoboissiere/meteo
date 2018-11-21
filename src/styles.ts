@@ -1,12 +1,11 @@
 
-import { StyleSheet } from "react-native"
+import { StyleSheet, Dimensions } from "react-native"
 
 export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-		backgroundColor: "#F5FCFF"
+		backgroundColor: "#F5FCFF",
+		height: Dimensions.get('window').height
 	},
 	welcome: {
 		fontSize: 20,
@@ -17,5 +16,11 @@ export const styles = StyleSheet.create({
 		textAlign: "center",
 		color: "#333333",
 		marginBottom: 5
+	},
+	contentContainer: {
+		paddingVertical: 20,
+		height: Dimensions.get('window').height,
+		justifyContent: "center",
+		alignItems: "center",
 	}
 })

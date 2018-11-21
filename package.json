@@ -14,12 +14,14 @@
 		"@types/highcharts": "^5.0.33",
 		"@types/react-native-document-picker": "^2.0.0",
 		"@types/react-native-fs": "^2.8.2",
+		"@types/react-navigation": "^2.13.3",
 		"highcharts": "^6.2.0",
 		"react": "^16.6.1",
 		"react-native": "^0.57.5",
 		"react-native-document-picker": "^2.1.0",
 		"react-native-fs": "^2.12.1",
 		"react-native-highcharts": "^1.0.2",
+		"react-navigation": "^3.0.0",
 		"realm": "^2.19.1"
 	},
 	"devDependencies": {

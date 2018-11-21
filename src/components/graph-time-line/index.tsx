@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, Dimensions } from "react-native";
+import { StyleSheet, Text, View, Button , Dimensions} from "react-native";
 import Highcharts from "highcharts";
 import { styles } from "./styles";
 import * as ctrl from "./controller";
@@ -7,7 +7,7 @@ import ChartView from "react-native-highcharts";
 
 export interface AppProps { }
 
-export class GraphBasicLine extends Component<AppProps> {
+export class GraphLineTime extends Component<AppProps> {
 	render() {
 		var Highcharts = "Highcharts";
 		var conf = {
@@ -73,16 +73,11 @@ export class GraphBasicLine extends Component<AppProps> {
 			}
 		};
 
-		const width = Dimensions.get('window').width; //full width
-		const height = Dimensions.get('window').height / 300000; //half height
-
 		return (
 			<View>
 				<Text>Chart</Text>
 				<ChartView
-					style={{
-						height: height, width: width, flex: 1,
-					}}
+					style={{height: 35, width: 200, flex: 1 }}
 					config={conf}
 					options={options}
 					stock={true}
