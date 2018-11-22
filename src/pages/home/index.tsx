@@ -19,7 +19,7 @@ export class HomeScreen extends Component<HomeProps> {
 
 	componentDidMount() {
 		RNFS.readDir(RNFS.ExternalDirectoryPath).then(result => {
-			if (result)
+			if (result.length > 0)
 				this.props.navigation.navigate('Files')
 		})
 	}
