@@ -29,6 +29,7 @@ export function uploadFile(nav: NavigationScreenProp<{}>) {
 
 			const props = splitedLines[0].map((col, i) => splitedLines.map(row => row[i]))
 			open({ schema: [WeatherProp.schema, WeatherHead.schema] }).then(realm => {
+				realm.deleteAll()
 				headers.forEach(head => {
 					realm.write(() => {
 						realm.create<WeatherHead>('WeatherHead', {
