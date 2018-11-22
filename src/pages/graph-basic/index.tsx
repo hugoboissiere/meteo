@@ -21,7 +21,6 @@ export class GraphBasicScreen extends Component<AppProps> {
 	render() {
 		return (
 			<View style={styles.contentContainer}>
-				<Text>{this.props.fileName}</Text>
 				<GraphBasicLine />
 			</View>
 		)

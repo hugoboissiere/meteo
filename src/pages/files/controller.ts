@@ -14,7 +14,7 @@ export function getFiles() {
 
 			const files: FileItem[] = []
 			result.forEach(elem => {
-				let fileName = elem.name.split('.').pop()
+				let fileName = elem.name.replace(/\.[^/.]+$/, "")
 				fileName = !fileName? "" : fileName
 				files.push({name: fileName, path: elem.path})
 			})
@@ -25,5 +25,6 @@ export function getFiles() {
 }
 
 export function goToFile(path: string, nav: NavigationScreenProp<{}>){
+	console.log(path)
 	nav.navigate('GraphBasic', { fileName: path })
 }
