@@ -4,8 +4,9 @@ import { DocumentPicker, DocumentPickerUtil, Result } from 'react-native-documen
 import * as RNFS from "react-native-fs"
 import { styles } from "./styles"
 import { UploadButton } from "./components/upload-button/index"
-import { GraphBasicLine } from "./components/graph-basic-line";
-import { GraphLineTime } from "./components/graph-time-line";
+import { GraphBasicLine } from "./components/graph-basic-line"
+import { GraphLineTime } from "./components/graph-time-line"
+import { getProps, getPropsName} from "./services/meteo-prop-services"
 // import { StackNavigator } from "react-navigation";
 
 export interface AppProps { }
@@ -21,7 +22,6 @@ export interface AppProps { }
 // 	Graph: { screen: GraphScreen}
 // })
 export class App extends Component<AppProps> {
-
 	render() {
 		// return <NavigationApp/>
 		return (
