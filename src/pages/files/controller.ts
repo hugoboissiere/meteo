@@ -25,6 +25,5 @@ export function getFiles() {
 }
 
 export function goToFile(path: string, nav: NavigationScreenProp<{}>){
-	console.log(path)
 	nav.navigate('GraphBasic', { fileName: path })
 }
