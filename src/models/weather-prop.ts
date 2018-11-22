@@ -5,10 +5,12 @@ export class WeatherProp {
 		name: 'WeatherProp',
 		properties: {
 			propName: 'string',
-			props: 'string[]'
+			props: 'string[]',
+			day: 'string'
 		}
 	}
 
 	public propName?: string
 	public props?: string[]
+	public day?: string
 }

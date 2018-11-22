@@ -1,13 +1,9 @@
-import { DocumentPicker, DocumentPickerUtil, Result } from 'react-native-document-picker'
+import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker'
 import * as RNFS from "react-native-fs"
 import { WeatherProp } from "../../models/weather-prop"
 import { WeatherHead } from "../../models/weather-head"
 import { open } from "realm"
 import { NavigationScreenProp } from 'react-navigation'
-
-export function moveFile(url: string, nav: NavigationScreenProp<{}>) {
-
-}
 
 export function uploadFile(nav: NavigationScreenProp<{}>) {
 	DocumentPicker.show({
@@ -22,6 +18,8 @@ export function uploadFile(nav: NavigationScreenProp<{}>) {
 			const lines = res.split('\n')
 			const headers = lines[1].split('\t')
 			const splitedLines: Array<string[]> = []
+			const fileName = lines[2].split(" ")[0]
+			const path = RNFS.ExternalDirectoryPath + '/' + fileName + '.his'
 
 			lines.splice(0, 2)
 			for (let i = 0; i < lines.length; i += 120)
@@ -29,29 +27,42 @@ export function uploadFile(nav: NavigationScreenProp<{}>) {
 
 			const props = splitedLines[0].map((col, i) => splitedLines.map(row => row[i]))
 			open({ schema: [WeatherProp.schema, WeatherHead.schema] }).then(realm => {
-				realm.deleteAll()
-				headers.forEach(head => {
-					realm.write(() => {
-						realm.create<WeatherHead>('WeatherHead', {
-							name: head
+				try {
+					const heads = realm.objects<WeatherHead>('WeatherHead').filtered(`name == "${headers[0]}"`)
+					if (heads.isEmpty()){
+						throw new Error()
+					}
+				}
+				catch{
+					headers.forEach(head => {
+						realm.write(() => {
+							realm.create<WeatherHead>('WeatherHead', {
+								name: head
+							})
 						})
 					})
-				})
+				}
 
-				props.forEach((prop, index) => {
-					realm.write(() => {
-						realm.create<WeatherProp>('WeatherProp', {
-							propName: headers[index],
-							props: prop
+				try {
+					const proprieties = realm.objects<WeatherProp>('WeatherProp').filtered(`day == "${fileName}"`)
+					if (proprieties.isEmpty())
+						throw new Error()
+				}
+				catch {
+					props.forEach((prop, index) => {
+						realm.write(() => {
+							realm.create<WeatherProp>('WeatherProp', {
+								propName: headers[index],
+								props: prop,
+								day: fileName,
+							})
 						})
 					})
-				})
+				}
+
+				RNFS.moveFile(url, path)
+				nav.navigate('Files')
 			})
-
-			const fileName = lines[1].split(" ")[0]
-			const path = RNFS.ExternalDirectoryPath + '/' + fileName + '.his'
-			RNFS.moveFile(url, path)
-			nav.navigate('GraphBasic')
 		})
 	})
 }
