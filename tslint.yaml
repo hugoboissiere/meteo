@@ -14,7 +14,7 @@ rules:
     - true
     - ['any', 'Why are you using TypeScript for? Use "{}" instead. If you cant then change your approach.']
     - ['null', 'Use undefined instead.']
-  no-any: true
+  no-any: false
   no-unsafe-any: true
   no-non-null-assertion: true
   no-parameter-reassignment: true
@@ -41,7 +41,7 @@ rules:
   ban-comma-operator: true
   no-arg: true
   no-duplicate-switch-case: true
-  no-default-export: true
+  no-default-export: false
 
   # security
   no-eval: true

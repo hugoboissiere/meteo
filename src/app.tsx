@@ -1,41 +1,18 @@
 import React, { Component } from "react"
-import { StyleSheet, Text, View, Button, ScrollView } from "react-native"
-import { DocumentPicker, DocumentPickerUtil, Result } from 'react-native-document-picker'
-import * as RNFS from "react-native-fs"
-import { styles } from "./styles"
-import { UploadButton } from "./components/upload-button/index"
-import { GraphBasicLine } from "./components/graph-basic-line"
-import { GraphLineTime } from "./components/graph-time-line"
-import { getProps, getPropsName} from "./services/meteo-prop-services"
-// import { StackNavigator } from "react-navigation";
+import { View } from "react-native"
+import { GraphBasicScreen } from "./pages/graph-basic/index"
+import { HomeScreen } from "./pages/home/index"
+import { createStackNavigator, createNavigationContainer } from 'react-navigation'
 
-export interface AppProps { }
+export const AppNavigator = createStackNavigator({
+	Home: { screen: HomeScreen },
+	GraphBasic: { screen: GraphBasicScreen },
+})
 
-// class HomeScreen extends React.Component {
-// 	render() {
-// 		const { navigate } = this.props.navigation
-// 	}
-// }
+export const AppContainer = createNavigationContainer(AppNavigator)
 
-// const NavigationApp = StackNavigator({
-// 	Home: { screen: HomeScreen},
-// 	Graph: { screen: GraphScreen}
-// })
-export class App extends Component<AppProps> {
+export class App extends React.Component {
 	render() {
-		// return <NavigationApp/>
-		return (
-			<ScrollView>
-				<View style={styles.contentContainer}>
-					{/* <Text style={styles.welcome}>App meteo!</Text>
-					<Text style={styles.instructions}>
-						test
-					</Text>
-					<UploadButton /> */}
-					<GraphBasicLine />
-					{/* <GraphBasicLine /> */}
-				</View>
-			</ScrollView>
-		)
+		return <AppContainer />
 	}
 }

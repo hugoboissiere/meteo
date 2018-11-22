@@ -1,17 +1,23 @@
 import React, { Component } from "react"
-import { StyleSheet, Text, View, Button } from "react-native"
-import { DocumentPicker, DocumentPickerUtil, Result } from 'react-native-document-picker'
-import * as RNFS from "react-native-fs"
+import { Button } from "react-native"
 import { styles } from "./styles"
 import * as ctrl from "./controller"
+import { withNavigation, NavigationScreenProp } from 'react-navigation'
 
-export interface AppProps { }
+export interface UploadButtonProps {
+	navigation: NavigationScreenProp<any, any>
+ }
 
-export class UploadButton extends Component<AppProps> {
+export class UploadButton extends Component<UploadButtonProps> {
+	constructor(props: UploadButtonProps){
+		super(props)
+	}
 
 	render() {
 		return (
-				<Button title="Upload File" onPress={ctrl.tryUploadFile} />
+				<Button title="Upload File" onPress={() => ctrl.uploadFile(this.props.navigation)} />
 		)
 	}
 }
+
+export default withNavigation(UploadButton)
