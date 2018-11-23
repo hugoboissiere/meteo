@@ -26,7 +26,7 @@ export function uploadFile(nav: NavigationScreenProp<{}>) {
 					const path = RNFS.ExternalDirectoryPath + "/" + fileName + ".his"
 
 					lines.splice(0, 2)
-					for (let i = 0; i < lines.length || lines[i + 120]; i += 120)
+					for (let i = 0; i < lines.length || lines[i + 121]; i += 120)
 						splitedLines.push(lines[i].split("\t"))
 
 					const props = splitedLines[0].map((col, i) =>

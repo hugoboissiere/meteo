@@ -36,12 +36,6 @@ export class PropsScreen extends Component<Props, States> {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Button
-					title="Voir le tableau"
-					onPress={() => {
-						this.props.navigation.navigate('Table', {	fileName: this.props.navigation.getParam('fileName') })
-					}}
-				/>
 				<FlatList
 					style={{ flex: 3 }}
 					data={this.state.props}

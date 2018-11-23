@@ -8,16 +8,85 @@ import { getProps } from "../../services/meteo-prop-services";
 
 export interface AppProps {
 	fileName: string
-	propName:string
+	propName: string
 }
 
-export class GraphBasicLine extends Component<AppProps> {
+export interface States {
+	min: number[]
+	max: number[]
+	avg: number[]
+	avgMax: number[]
+	avgMin: number[]
+	avgDay: number[]
+	hours: string[]
+}
+
+export class GraphBasicLine extends Component<AppProps, States> {
 	constructor(props: AppProps) {
 		super(props)
 		const fileName = this.props.fileName
 		const propName = this.props.propName
-		getProps(propName, fileName).then((res) => {
-			console.log("epic",res)
+		this.state = {
+			min: [],
+			max: [],
+			avg: [],
+			avgMax: [],
+			avgMin: [],
+			avgDay: [],
+			hours: []
+		}
+	}
+
+	componentDidMount() {
+		getProps('CREATEDATE', this.props.fileName).then(hours => {
+			getProps(this.props.propName, this.props.fileName).then((res) => {
+				this.setState({
+					avgMin: [parseFloat(res[0])],
+					avgMax: [0]
+				})
+				let tmpArray = []
+				for (let i = 0; i < res.length; i++) {
+					const value = parseFloat(res[i])
+					tmpArray.push(value)
+					if (value > this.state.avgMax[0]) {
+						this.setState({ avgMax: [value] })
+					}
+					if (value < this.state.avgMin[0]) {
+						this.setState({ avgMin: [value] })
+					}
+					if (i % 6 === 0) {
+						const mi = this.state.min
+						const ma = this.state.max
+						const av = this.state.avg
+
+						mi.push(Math.min.apply(Math, tmpArray))
+						ma.push(Math.max.apply(Math, tmpArray))
+						let sum = 0
+						for (let j = 0; j < tmpArray.length; j++) {
+							sum += tmpArray[j]
+						}
+						av.push(sum / tmpArray.length)
+
+						this.setState({
+							min: mi,
+							max: ma,
+							avg: av
+						})
+						tmpArray = []
+					}
+				}
+
+				const avgMaxTmp: number[] = []
+				const avgMinTmp: number[] = []
+				for (let i = 0; i < 24; i++) {
+					avgMaxTmp.push(this.state.avgMax[0])
+					avgMinTmp.push(this.state.avgMin[0])
+				}
+				this.setState({
+					avgMax: avgMaxTmp,
+					avgMin: avgMinTmp
+				})
+			})
 		})
 	}
 
@@ -29,11 +98,11 @@ export class GraphBasicLine extends Component<AppProps> {
 				marginRight: 10
 			},
 			title: {
-				text: "Live random data"
+				text: this.props.propName
 			},
 			yAxis: {
 				title: {
-					text: "Number of Employees"
+					text: "Valeur"
 				}
 			},
 			legend: {
@@ -49,13 +118,29 @@ export class GraphBasicLine extends Component<AppProps> {
 					label: {
 						connectorAllowed: false
 					},
-					pointStart: 2010
+					pointStart: 0
 				}
 			},
 			series: [
 				{
-					name: "Installation",
-					data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+					name: "maxDay",
+					data: this.state.avgMax
+				},
+				{
+					name: "minDay",
+					data: this.state.avgMin
+				},
+				{
+					name: "max",
+					data: this.state.max
+				},
+				{
+					name: "min",
+					data: this.state.min
+				},
+				{
+					name: "avg",
+					data: this.state.avg
 				}
 			]
 		}

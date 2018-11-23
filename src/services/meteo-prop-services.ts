@@ -3,7 +3,7 @@ import { WeatherProp } from "../models/weather-prop"
 import { WeatherHead } from "../models/weather-head"
 
 export function getProps(propName: string, fileName: string) {
-	return new Promise<WeatherProp[]>((resolve, reject) => {
+	return new Promise<string[]>((resolve, reject) => {
 		open({ schema: [WeatherProp.schema] }).then(realm => {
 			const props = realm.objects<WeatherProp>('WeatherProp').filtered(`day == "${fileName}" && propName == "${propName}"`)
 			const propList: WeatherProp[] = []
@@ -14,7 +14,7 @@ export function getProps(propName: string, fileName: string) {
 					props: elem.props
 				})
 			})
-			resolve(propList)
+			resolve(props[0].props)
 		})
 	})
 }
