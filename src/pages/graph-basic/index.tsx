@@ -3,6 +3,7 @@ import { View, Text } from "react-native"
 import { styles } from "./styles"
 import { GraphBasicLine } from "../../components/graph-basic-line"
 import { NavigationStackScreenOptions, NavigationScreenProp } from "react-navigation"
+import { TableClass } from "../../components/table";
 
 export interface AppProps {
 	navigation: NavigationScreenProp<any, any>
@@ -22,7 +23,7 @@ export class GraphBasicScreen extends Component<AppProps> {
 	render() {
 		return (
 			<View style={styles.contentContainer}>
-				<GraphBasicLine />
+				<TableClass />
 			</View>
 		)
 	}
