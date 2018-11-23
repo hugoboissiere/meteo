@@ -23,7 +23,7 @@ export class PropsScreen extends Component<Props, States> {
 
 	constructor(props: Props) {
 		super(props)
-		this.state = { props: []}
+		this.state = { props: [] }
 		this.props.navigation.getParam('fileName')
 	}
 
@@ -38,11 +38,12 @@ export class PropsScreen extends Component<Props, States> {
 	render() {
 		return (
 			<View style={styles.container}>
-			<TableClass fileName={this.props.navigation.getParam('fileName')} />
+				<TableClass fileName={this.props.navigation.getParam('fileName')} />
 				<FlatList
+				style={{flex: 3}}
 					data={this.state.props}
 					renderItem={({ item }) =>
-							<Text style={styles.item} onPress={() => goToTab(item.name, this.props.navigation)}>{item.name}</Text>
+						<Text style={styles.item} onPress={() => goToTab(item.name, this.props.navigation)}>{item.name}</Text>
 					}
 					keyExtractor={(item, index) => index.toString()}
 				/>
