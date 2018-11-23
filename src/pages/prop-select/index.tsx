@@ -38,7 +38,7 @@ export class PropsScreen extends Component<Props, States> {
 	render() {
 		return (
 			<View style={styles.container}>
-			<TableClass fileName={this.props.navigation.getParam('fileName')}/>
+			<TableClass fileName={this.props.navigation.getParam('fileName')} />
 				<FlatList
 					data={this.state.props}
 					renderItem={({ item }) =>
