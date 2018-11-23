@@ -4,10 +4,24 @@ import Highcharts from "highcharts"
 import { styles } from "./styles"
 import * as ctrl from "./controller"
 import ChartView from "react-native-highcharts"
+import { getProps } from "../../services/meteo-prop-services";
 
-export interface AppProps { }
+export interface AppProps { 
+	fileName: string
+	propName:string
+}
 
 export class GraphBasicLine extends Component<AppProps> {
+	constructor(props: AppProps) {
+		super(props)
+		const fileName = this.props.fileName
+		const propName = this.props.propName
+		console.warn(fileName, propName)
+		getProps(propName, fileName).then((res) => {
+			console.warn("epic",res)
+		})
+	}
+
 	render() {
 		const Highcharts = "Highcharts"
 		const conf = {

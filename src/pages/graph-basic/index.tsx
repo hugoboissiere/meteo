@@ -23,7 +23,7 @@ export class GraphBasicScreen extends Component<AppProps> {
 	render() {
 		return (
 			<View style={styles.contentContainer}>
-				<GraphBasicLine />
+				<GraphBasicLine fileName={this.props.navigation.getParam('fileName')} propName={this.props.navigation.getParam('propName')}/>
 			</View>
 		)
 	}
