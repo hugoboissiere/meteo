@@ -10,8 +10,9 @@ export interface AppProps {
 }
 
 export class GraphBasicScreen extends Component<AppProps> {
-	constructor(props: AppProps){
+	constructor(props: AppProps) {
 		super(props)
+		this.props.navigation.getParam('fileName')
 	}
 
 	static navigationOptions: NavigationStackScreenOptions = {

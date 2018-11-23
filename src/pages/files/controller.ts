@@ -1,5 +1,7 @@
 import * as RNFS from "react-native-fs"
 import { NavigationScreenProp } from 'react-navigation'
+import { WeatherProp } from "../../models/weather-prop"
+import { open } from "realm"
 
 export interface FileItem {
 	name: string
@@ -15,8 +17,8 @@ export function getFiles() {
 			const files: FileItem[] = []
 			result.forEach(elem => {
 				let fileName = elem.name.replace(/\.[^/.]+$/, "")
-				fileName = !fileName? "" : fileName
-				files.push({name: fileName, path: elem.path})
+				fileName = !fileName ? "" : fileName
+				files.push({ name: fileName, path: elem.path })
 			})
 
 			resolve(files)
@@ -24,6 +26,15 @@ export function getFiles() {
 	})
 }
 
-export function goToFile(path: string, nav: NavigationScreenProp<{}>){
+export function goToFile(path: string, nav: NavigationScreenProp<{}>) {
 	nav.navigate('GraphBasic', { fileName: path })
+}
+
+export function deleteFile(path: string, name: string) {
+	RNFS.unlink(path).then(res => {
+		open({ schema: [WeatherProp.schema] }).then(realm => {
+			const props = realm.objects<WeatherProp>('WeatherProp').filtered(`day == "${name}"`)
+			realm.delete(props)
+		})
+	})
 }

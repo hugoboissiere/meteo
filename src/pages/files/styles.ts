@@ -9,5 +9,10 @@ export const styles = StyleSheet.create({
 		padding: 10,
 		fontSize: 18,
 		height: 44,
+	},
+	del: {
+		fontSize: 18,
+		color: 'red',
+		textAlign: 'right'
 	}
 })
