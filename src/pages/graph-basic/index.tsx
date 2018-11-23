@@ -23,7 +23,7 @@ export class GraphBasicScreen extends Component<AppProps> {
 	render() {
 		return (
 			<View style={styles.contentContainer}>
-				<TableClass />
+				<GraphBasicLine />
 			</View>
 		)
 	}
