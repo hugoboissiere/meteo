@@ -1,6 +1,6 @@
 import {
-  DocumentPicker,
-  DocumentPickerUtil
+	DocumentPicker,
+	DocumentPickerUtil
 } from "react-native-document-picker";
 import * as RNFS from "react-native-fs";
 import { WeatherProp } from "../../models/weather-prop";
@@ -16,8 +16,8 @@ export function uploadFile(nav: NavigationScreenProp<{}>) {
 			},
 			(error, res) => {
 				if (error || !res || res.uri.split(".").pop() !== "his") return;
-	
-	
+
+
 				const url = res.uri;
 				RNFS.readFile(url).then(res => {
 					const lines = res.split("\n");
@@ -25,11 +25,11 @@ export function uploadFile(nav: NavigationScreenProp<{}>) {
 					const splitedLines: Array<string[]> = [];
 					const fileName = lines[2].split(" ")[0];
 					const path = RNFS.ExternalDirectoryPath + "/" + fileName + ".his";
-	
+
 					lines.splice(0, 2);
 					for (let i = 0; i < lines.length || lines[i - 120]; i += 120)
 						splitedLines.push(lines[i].split("\t"));
-	
+
 					const props = splitedLines[0].map((col, i) =>
 						splitedLines.map(row => row[i])
 					);
@@ -51,7 +51,7 @@ export function uploadFile(nav: NavigationScreenProp<{}>) {
 									});
 								});
 							}
-	
+
 							try {
 								const proprieties = realm
 									.objects<WeatherProp>("WeatherProp")
@@ -68,7 +68,7 @@ export function uploadFile(nav: NavigationScreenProp<{}>) {
 									});
 								});
 							}
-	
+
 							RNFS.moveFile(url, path);
 							nav.navigate("Files");
 							resolve(true)
@@ -76,7 +76,7 @@ export function uploadFile(nav: NavigationScreenProp<{}>) {
 					);
 				});
 			}
-		);		
+		);
 	});
 
 }
