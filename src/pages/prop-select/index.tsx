@@ -5,7 +5,6 @@ import { getFiles, FileItem, goToTab, deleteFile } from "./controller"
 import { NavigationStackScreenOptions, NavigationScreenProp } from "react-navigation"
 import { WeatherHead } from "../../models/weather-head"
 import { getPropsName } from "../../services/meteo-prop-services"
-import { TableClass } from "../../components/table";
 
 export interface Props {
 	navigation: NavigationScreenProp<any, any>
@@ -47,7 +46,7 @@ export class PropsScreen extends Component<Props, States> {
 					style={{ flex: 3 }}
 					data={this.state.props}
 					renderItem={({ item }) =>
-						<Text style={styles.item} onPress={() => goToTab(item.name, this.props.navigation)}>{item.name}</Text>
+						<Text style={styles.item} onPress={() => goToTab(this.props.navigation.getParam('fileName'), item.name, this.props.navigation)}>{item.name}</Text>
 					}
 					keyExtractor={(item, index) => index.toString()}
 				/>

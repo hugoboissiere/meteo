@@ -3,11 +3,11 @@ import { View, Text } from "react-native"
 import { styles } from "./styles"
 import { GraphBasicLine } from "../../components/graph-basic-line"
 import { NavigationStackScreenOptions, NavigationScreenProp } from "react-navigation"
-import { TableClass } from "../../components/table";
 
 export interface AppProps {
 	navigation: NavigationScreenProp<any, any>
 	fileName: string
+	propName:string
 }
 
 export class GraphBasicScreen extends Component<AppProps> {

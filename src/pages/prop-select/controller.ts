@@ -26,9 +26,9 @@ export function getFiles() {
 	})
 }
 
-export function goToTab(path?: string, nav?: NavigationScreenProp<{}>) {
+export function goToTab(path: string, propname?: string, nav?: NavigationScreenProp<{}>) {
 	if (nav)
-		nav.navigate('GraphBasic', { fileName: path })
+		nav.navigate('GraphBasic', { fileName: path, propName: propname })
 }
 
 export function deleteFile(path: string, name: string) {
