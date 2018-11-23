@@ -78,13 +78,21 @@ export class GraphBasicLine extends Component<AppProps, States> {
 
 				const avgMaxTmp: number[] = []
 				const avgMinTmp: number[] = []
+				const avgDayTmp: number[] = []
+				let sum = 0
+						for (let j = 0; j < this.state.avg.length; j++) {
+							sum += this.state.avg[j]
+						}
+				sum = sum / this.state.avg.length
 				for (let i = 0; i < 24; i++) {
 					avgMaxTmp.push(this.state.avgMax[0])
 					avgMinTmp.push(this.state.avgMin[0])
+					avgDayTmp.push(sum)
 				}
 				this.setState({
 					avgMax: avgMaxTmp,
-					avgMin: avgMinTmp
+					avgMin: avgMinTmp,
+					avgDay: avgDayTmp
 				})
 			})
 		})
@@ -141,6 +149,10 @@ export class GraphBasicLine extends Component<AppProps, States> {
 				{
 					name: "avg",
 					data: this.state.avg
+				},
+				{
+					name: "avgDay",
+					data: this.state.avgDay
 				}
 			]
 		}
