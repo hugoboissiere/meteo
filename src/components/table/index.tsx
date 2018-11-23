@@ -9,7 +9,7 @@ import { getPropsName, getProps } from "../../services/meteo-prop-services";
 import { NavigationScreenProp } from "react-navigation";
 
 export interface AppProps { 
-	navigation: NavigationScreenProp<any, any>,
+	navigation: NavigationScreenProp<any, any>
 	fileName: string
 }
 

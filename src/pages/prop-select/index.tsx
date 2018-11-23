@@ -5,6 +5,7 @@ import { getFiles, FileItem, goToTab, deleteFile } from "./controller"
 import { NavigationStackScreenOptions, NavigationScreenProp } from "react-navigation"
 import { WeatherHead } from "../../models/weather-head"
 import { getPropsName } from "../../services/meteo-prop-services"
+import { TableClass } from "../../components/table";
 
 export interface Props {
 	navigation: NavigationScreenProp<any, any>
@@ -37,6 +38,7 @@ export class PropsScreen extends Component<Props, States> {
 	render() {
 		return (
 			<View style={styles.container}>
+			<TableClass fileName={this.props.navigation.getParam('fileName')}/>
 				<FlatList
 					data={this.state.props}
 					renderItem={({ item }) =>
