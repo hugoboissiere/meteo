@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { FlatList, Text, View } from "react-native"
+import { FlatList, Text, View, Button } from "react-native"
 import { styles } from "./styles"
 import { getFiles, FileItem, goToTab, deleteFile } from "./controller"
 import { NavigationStackScreenOptions, NavigationScreenProp } from "react-navigation"
@@ -38,7 +38,11 @@ export class PropsScreen extends Component<Props, States> {
 	render() {
 		return (
 			<View style={styles.container}>
-			<TableClass fileName={this.props.navigation.getParam('fileName')} />
+      <Button
+        title="Voir le tableau"
+        onPress={() => { } }
+      />
+			{/* <TableClass fileName={this.props.navigation.getParam('fileName')} /> */}
 				<FlatList
 					data={this.state.props}
 					renderItem={({ item }) =>
