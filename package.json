@@ -21,6 +21,7 @@
 		"react-native-fs": "^2.12.1",
 		"react-native-gesture-handler": "^1.0.9",
 		"react-native-highcharts": "^1.0.2",
+		"react-native-table-component": "^1.1.8",
 		"react-navigation": "^3.0.0",
 		"realm": "^2.19.1"
 	},
