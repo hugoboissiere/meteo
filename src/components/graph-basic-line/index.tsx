@@ -6,7 +6,7 @@ import * as ctrl from "./controller"
 import ChartView from "react-native-highcharts"
 import { getProps } from "../../services/meteo-prop-services";
 
-export interface AppProps { 
+export interface AppProps {
 	fileName: string
 	propName:string
 }
@@ -16,9 +16,8 @@ export class GraphBasicLine extends Component<AppProps> {
 		super(props)
 		const fileName = this.props.fileName
 		const propName = this.props.propName
-		console.warn(fileName, propName)
 		getProps(propName, fileName).then((res) => {
-			console.warn("epic",res)
+			console.log("epic",res)
 		})
 	}
 

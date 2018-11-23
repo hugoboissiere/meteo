@@ -17,7 +17,7 @@ export interface States {
 	tableData: String[][];
 }
 
-export class TableClass extends Component<AppProps, States> {
+export class TableScreen extends Component<AppProps, States> {
 	constructor(props: AppProps) {
 		super(props)
 

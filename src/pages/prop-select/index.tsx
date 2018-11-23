@@ -23,7 +23,6 @@ export class PropsScreen extends Component<Props, States> {
 	constructor(props: Props) {
 		super(props)
 		this.state = { props: [] }
-		this.props.navigation.getParam('fileName')
 	}
 
 	componentDidMount() {
@@ -39,9 +38,10 @@ export class PropsScreen extends Component<Props, States> {
 			<View style={styles.container}>
 				<Button
 					title="Voir le tableau"
-					onPress={() => { }}
+					onPress={() => {
+						this.props.navigation.navigate('Table', {	fileName: this.props.navigation.getParam('fileName') })
+					}}
 				/>
-				{/* <TableClass fileName={this.props.navigation.getParam('fileName')} /> */}
 				<FlatList
 					style={{ flex: 3 }}
 					data={this.state.props}
